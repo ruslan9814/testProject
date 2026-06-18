@@ -372,7 +372,7 @@ main (основная)
   └── hotfix (срочный баг)
         └── коммит 1
 
-        
+
 ✅ ТВОЯ ПОЛНАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ (С НУЛЯ)
 bash
 # ===== ПЕРВЫЙ РАЗ =====
@@ -402,3 +402,21 @@ git push origin main
 git branch -d documentation
 git push origin --delete documentation
 Теперь у тебя есть полное руководство! Сохраняй и пользуйся. 🚀
+
+
+
+
+
+C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git branch gitHubDocumentation
+
+C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git checkout gitHubDocumentation
+Switched to branch 'gitHubDocumentation'
+
+C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git add documentation
+
+C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git commit -m "gitHubCommands"
+[gitHubDocumentation 1499cbb] gitHubCommands
+ 1 file changed, 404 insertions(+)
+ create mode 100644 documentation/allCommandsGitHub.txt
+
+C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git push origin gitHubDocumentation
