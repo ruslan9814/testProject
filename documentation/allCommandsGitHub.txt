@@ -1,0 +1,404 @@
+📚 ПОЛНЫЙ КУРС GIT: ОТ НУЛЯ ДО ПРОФИ
+Все команды по порядку, от инициализации до удаления веток.
+
+🔵 ЭТАП 1: ПЕРВОНАЧАЛЬНАЯ НАСТРОЙКА
+Создание репозитория и связь с GitHub
+bash
+# 1. Инициализация Git в папке
+git init
+
+# 2. Связь с удаленным репозиторием
+git remote add origin https://github.com/ruslan9814/testProject.git
+
+# 3. Проверка связи
+git remote -v
+
+# 4. Добавление всех файлов
+git add .
+
+# 5. Создание первого коммита
+git commit -m "Первый коммит"
+
+# 6. Отправка на GitHub (первый раз с -u)
+git push -u origin main
+
+
+🟢 ЭТАП 2: РАБОТА С ФАЙЛАМИ (ЕЖЕДНЕВНЫЙ ЦИКЛ)
+Добавление, коммит и отправка
+bash
+# 1. Проверка статуса
+git status
+
+# 2. Добавление конкретного файла
+git add readme.txt
+
+# 3. Добавление всех файлов
+git add .
+
+# 4. Добавление всех файлов (другой вариант)
+git add -A
+
+# 5. Создание коммита
+git commit -m "Описание изменений"
+
+# 6. Создание коммита (с добавлением всех измененных файлов)
+git commit -am "Быстрый коммит"
+
+# 7. Отправка на GitHub (после первого -u)
+git push
+
+# 8. Полная отправка с указанием ветки
+git push origin main
+
+
+🟡 ЭТАП 3: РАБОТА С ВЕТКАМИ (BRANCHES)
+Создание и переключение веток
+bash
+# 1. Создание новой ветки
+git branch feature/button
+
+# 2. Создание и переключение на новую ветку (команда 1)
+git branch feature/button
+git checkout feature/button
+
+# 3. Создание и переключение на новую ветку (команда 2 - короче)
+git checkout -b feature/button
+
+# 4. Переключение на существующую ветку
+git checkout feature/button
+
+# 5. Переключение на main
+git checkout main
+
+# 6. Показать все ветки
+git branch
+
+# 7. Показать все ветки (включая удаленные)
+git branch -a
+
+# 8. Переименование текущей ветки
+git branch -M main
+Работа в ветке (полный цикл)
+bash
+# 1. Создать и переключиться на новую ветку
+git checkout -b documentation
+
+# 2. Проверить, что ты на нужной ветке
+git branch
+
+# 3. Добавить папку с файлами
+git add documentation
+
+# 4. Сделать коммит
+git commit -m "Добавил документацию"
+
+# 5. Отправить ветку на GitHub
+git push origin documentation
+
+# 6. Проверить статус
+git status
+
+
+🟠 ЭТАП 4: СЛИЯНИЕ (MERGE)
+Слияние ветки с main
+bash
+# 1. Переключиться на main
+git checkout main
+
+# 2. Обновить main (забрать последние изменения)
+git pull origin main
+
+# 3. Слить ветку в main
+git merge documentation
+
+# 4. Отправить обновленный main на GitHub
+git push origin main
+Слияние с конфликтами
+bash
+# 1. Попытка слияния (если есть конфликт)
+git merge feature/button
+# Вывод: CONFLICT (content): Merge conflict in readme.txt
+
+# 2. Открыть файл с конфликтом
+# Найти строки с <<<<<<<, =======, >>>>>>>
+
+# 3. Исправить конфликт вручную (удалить маркеры)
+
+# 4. Добавить исправленный файл
+git add readme.txt
+
+# 5. Продолжить слияние
+git commit -m "Разрешил конфликт при слиянии"
+
+# 6. Отправить на GitHub
+git push origin main
+
+
+🔴 ЭТАП 5: УДАЛЕНИЕ ВЕТОК
+Удаление локальной ветки
+bash
+# 1. Переключиться на другую ветку (нельзя удалить текущую)
+git checkout main
+
+# 2. Удалить ветку (если она уже слита)
+git branch -d documentation
+
+# 3. Принудительное удаление ветки (даже если не слита)
+git branch -D documentation
+Удаление ветки на GitHub
+bash
+# 1. Удалить ветку на GitHub (способ 1)
+git push origin --delete documentation
+
+# 2. Удалить ветку на GitHub (способ 2 - старый синтаксис)
+git push origin :documentation
+🟣 ЭТАП 6: РАБОТА С УДАЛЕННЫМ РЕПОЗИТОРИЕМ
+Основные команды
+bash
+# 1. Связь с GitHub
+git remote add origin https://github.com/ruslan9814/testProject.git
+
+# 2. Показать все удаленные репозитории
+git remote -v
+
+# 3. Удалить связь с удаленным репозиторием
+git remote remove origin
+
+# 4. Сменить URL удаленного репозитория
+git remote set-url origin https://github.com/ruslan9814/new-project.git
+Загрузка и выгрузка
+bash
+# 1. Отправка на GitHub (первый раз)
+git push -u origin main
+
+# 2. Отправка на GitHub (последующие разы)
+git push
+
+# 3. Отправка с указанием ветки
+git push origin feature/button
+
+# 4. Загрузка изменений с GitHub
+git pull
+
+# 5. Загрузка изменений с указанием ветки
+git pull origin main
+
+# 6. Только скачать изменения (без слияния)
+git fetch origin
+
+# 7. Клонирование репозитория
+git clone https://github.com/ruslan9814/testProject.git
+
+
+🔵 ЭТАП 7: ПРОВЕРКА И ИНФОРМАЦИЯ
+Статус и логи
+bash
+# 1. Проверка статуса (главная команда)
+git status
+
+# 2. Показать историю коммитов
+git log
+
+# 3. Показать историю в кратком виде
+git log --oneline
+
+# 4. Показать изменения (до git add)
+git diff
+
+# 5. Показать изменения (после git add)
+git diff --staged
+
+# 6. Показать изменения в конкретном коммите
+git show 95b4605
+
+# 7. Показать все ветки
+git branch
+
+# 8. Показать все ветки с последними коммитами
+git branch -v
+
+
+🟤 ЭТАП 8: ОТМЕНА ИЗМЕНЕНИЙ
+Отмена до коммита
+bash
+# 1. Отменить изменения в файле (вернуть к последнему коммиту)
+git restore readme.txt
+
+# 2. Убрать файл из staging (подготовки)
+git reset readme.txt
+
+# 3. Убрать все файлы из staging
+git reset
+
+# 4. Отменить изменения в файле (старый способ)
+git checkout -- readme.txt
+Отмена после коммита
+bash
+# 1. Откатить к определенному коммиту (удаляет изменения)
+git reset --hard 95b4605
+
+# 2. Откатить к коммиту (сохраняет изменения в staging)
+git reset --soft 95b4605
+
+# 3. Откатить к коммиту (сохраняет изменения в файлах)
+git reset --mixed 95b4605
+
+# 4. Создать новый коммит, отменяющий изменения старого
+git revert 95b4605
+
+# 5. Изменить последний коммит (добавить файлы или изменить сообщение)
+git commit --amend -m "Новое сообщение"
+
+
+⚪ ЭТАП 9: СТЕШИРОВАНИЕ (STASH)
+Временное сохранение изменений
+bash
+# 1. Спрятать незакоммиченные изменения
+git stash
+
+# 2. Спрятать с сообщением
+git stash push -m "Сохранил работу"
+
+# 3. Показать все спрятанные изменения
+git stash list
+
+# 4. Вернуть последние спрятанные изменения (и удалить из стеша)
+git stash pop
+
+# 5. Вернуть последние спрятанные изменения (сохранить в стеке)
+git stash apply
+
+# 6. Вернуть изменения из конкретного стеша
+git stash apply stash@{0}
+
+# 7. Удалить последний стеш
+git stash drop
+
+# 8. Удалить все стеши
+git stash clear
+
+
+🟢 ЭТАП 10: ПОЛНЫЙ РАБОЧИЙ СЦЕНАРИЙ
+Создание нового функционала
+bash
+# 1. Создать и переключиться на новую ветку
+git checkout -b feature/new-feature
+
+# 2. Добавить файлы
+git add .
+
+# 3. Сделать коммит
+git commit -m "Начал новую фичу"
+
+# 4. Отправить ветку на GitHub
+git push origin feature/new-feature
+
+# 5. Работать, коммитить, пушить
+git add .
+git commit -m "Закончил фичу"
+git push origin feature/new-feature
+Слияние и завершение работы
+bash
+# 1. Переключиться на main
+git checkout main
+
+# 2. Обновить main
+git pull origin main
+
+# 3. Слить ветку в main
+git merge feature/new-feature
+
+# 4. Отправить на GitHub
+git push origin main
+
+# 5. Удалить локальную ветку
+git branch -d feature/new-feature
+
+# 6. Удалить ветку на GitHub
+git push origin --delete feature/new-feature
+
+# 7. Проверить, что всё чисто
+git status
+Работа в команде (ежедневный цикл)
+bash
+# 1. Проверить статус
+git status
+
+# 2. Добавить изменения
+git add .
+
+# 3. Сделать коммит
+git commit -m "Сделал задачу"
+
+# 4. Забрать чужие изменения
+git pull origin main
+
+# 5. Отправить свои изменения
+git push origin main
+
+
+📊 КРАТКАЯ ШПАРГАЛКА (САМОЕ ВАЖНОЕ)
+Действие	Команда
+Создать репозиторий	git init
+Связать с GitHub	git remote add origin <url>
+Добавить все файлы	git add .
+Создать коммит	git commit -m "текст"
+Отправить на GitHub	git push
+Забрать с GitHub	git pull
+Проверить статус	git status
+Показать историю	git log --oneline
+Создать ветку	git branch <имя>
+Переключить ветку	git checkout <имя>
+Создать и переключить	git checkout -b <имя>
+Слить ветку	git merge <имя>
+Удалить ветку	git branch -d <имя>
+Удалить ветку на GitHub	git push origin --delete <имя>
+Откатить изменения	git reset --hard <хэш>
+
+
+🎯 СХЕМА РАБОТЫ С ВЕТКАМИ
+text
+main (основная)
+  │
+  ├── feature/button (новая кнопка)
+  │     ├── коммит 1
+  │     ├── коммит 2
+  │     └── коммит 3
+  │
+  ├── documentation (документация)
+  │     ├── коммит 1
+  │     └── коммит 2
+  │
+  └── hotfix (срочный баг)
+        └── коммит 1
+
+        
+✅ ТВОЯ ПОЛНАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ (С НУЛЯ)
+bash
+# ===== ПЕРВЫЙ РАЗ =====
+git init
+git remote add origin https://github.com/ruslan9814/testProject.git
+git add .
+git commit -m "Первый коммит"
+git push -u origin main
+
+# ===== СОЗДАНИЕ ВЕТКИ =====
+git branch documentation
+git checkout documentation
+# или одной командой: git checkout -b documentation
+
+# ===== РАБОТА В ВЕТКЕ =====
+git add documentation
+git commit -m "Добавил документацию"
+git push origin documentation
+
+# ===== СЛИЯНИЕ С MAIN =====
+git checkout main
+git pull origin main
+git merge documentation
+git push origin main
+
+# ===== УДАЛЕНИЕ ВЕТКИ =====
+git branch -d documentation
+git push origin --delete documentation
+Теперь у тебя есть полное руководство! Сохраняй и пользуйся. 🚀
