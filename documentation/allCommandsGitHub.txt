@@ -420,3 +420,5 @@ C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git commit -m "gitHubCommands"
  create mode 100644 documentation/allCommandsGitHub.txt
 
 C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git push origin gitHubDocumentation
+
+и по второну разу опять делаешь также git add documentation сперва и все действия также
