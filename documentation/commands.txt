@@ -1,0 +1,554 @@
+📚 ПОЛНЫЙ СПРАВОЧНИК ВСЕХ КОМАНД GIT (с твоими примерами)
+Разобью на логические блоки — от простого к сложному. Каждая команда с реальным примером из твоей практики.
+
+🔵 БЛОК 1: НАСТРОЙКА И ИНИЦИАЛИЗАЦИЯ
+git init
+Что делает: Создает пустой Git-репозиторий в текущей папке. Появляется скрытая папка .git.
+
+Твой пример:
+
+bash
+C:\Users\Asus\Desktop\ТЕСТОВЫЙ ФАЙЛ>git init
+Initialized empty Git repository in C:/Users/Asus/Desktop/ТЕСТОВЫЙ ФАЙЛ/.git/
+Когда использовать: В самом начале, когда хочешь начать отслеживать версии в новой папке.
+
+git config
+Что делает: Настраивает Git (имя пользователя, почту, редактор и т.д.).
+
+Примеры:
+
+bash
+git config --global user.name "Ruslan"
+git config --global user.email "ruslan@example.com"
+git config --list  # Показать все настройки
+Когда использовать: Один раз после установки Git.
+
+🟢 БЛОК 2: РАБОТА С ФАЙЛАМИ (СТЕЙДЖИНГ)
+git add <файл>
+Что делает: Добавляет конкретный файл в область подготовленных файлов (staging area). Файл готовится к коммиту.
+
+Твой пример с ошибкой:
+
+bash
+git add readme.txt
+fatal: pathspec 'readme.txt' did not match any files
+Почему ошибка: Файла readme.txt нет в папке.
+
+Правильный пример:
+
+bash
+git add index.html     # Добавить только index.html
+git add style.css      # Добавить только style.css
+git add .
+Что делает: Добавляет ВСЕ измененные и новые файлы в текущей папке и подпапках.
+
+Твой пример:
+
+bash
+git add .
+Что произошло: Добавил всю папку components/ и все файлы внутри.
+
+Когда использовать: Когда хочешь закоммитить все изменения сразу.
+
+git add -A
+Что делает: Добавляет абсолютно все изменения во всем репозитории (даже вне текущей папки).
+
+Пример:
+
+bash
+git add -A
+Отличие от git add .: . добавляет только из текущей папки, -A — из всего проекта.
+
+git reset <файл>
+Что делает: Убирает файл из подготовленных (из staging area), но не удаляет изменения в файле.
+
+Пример:
+
+bash
+git add style.css      # Добавили по ошибке
+git reset style.css    # Убрали из подготовки
+Когда использовать: Когда добавил лишний файл в git add . и хочешь его исключить из коммита.
+
+git rm <файл>
+Что делает: Удаляет файл из репозитория и с диска.
+
+Пример:
+
+bash
+git rm old_file.txt
+git commit -m "Удалил старый файл"
+🟡 БЛОК 3: КОММИТЫ (СОХРАНЕНИЯ)
+git commit -m "сообщение"
+Что делает: Создает коммит (слепок) всех подготовленных файлов с описанием.
+
+Твой ПЕРВЫЙ правильный коммит:
+
+bash
+git commit -m "lesson"
+[main (root-commit) 93f392f] lesson
+ 1 file changed, 5 insertions(+)
+ create mode 100644 components/product.js/product.js
+Что означают цифры:
+
+root-commit — первый коммит
+
+93f392f — уникальный ID коммита
+
+1 file changed — изменен 1 файл
+
+5 insertions — добавлено 5 строк
+
+Твой ВТОРОЙ коммит:
+
+bash
+git commit -m "Lesson"
+[main 204e4e4] Lesson
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+Что изменилось: В файле 2 строки добавилось, 1 удалилась.
+
+git commit -am "сообщение"
+Что делает: Добавляет все измененные файлы и сразу делает коммит (пропускает шаг git add).
+
+Пример:
+
+bash
+git commit -am "Быстрый коммит всех изменений"
+Важно: Не добавляет новые (неотслеживаемые) файлы! Только те, что уже были в Git.
+
+git commit --amend -m "новое сообщение"
+Что делает: Изменяет последний коммит (сообщение или состав).
+
+Пример:
+
+bash
+git commit -m "Поправил баг"     # Сделали коммит
+git add forgotten_file.py        # Забыли добавить файл
+git commit --amend -m "Поправил баг + добавил файл"  # Объединили
+🟠 БЛОК 4: ИНФОРМАЦИЯ И ПРОВЕРКА
+git status
+Что делает: Показывает текущее состояние — какие файлы изменены, добавлены, готовы к коммиту.
+
+Твой пример:
+
+bash
+git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        components/
+
+nothing added to commit but untracked files present (use "git add" to track)
+Что показывает:
+
+On branch main — мы на ветке main
+
+No commits yet — еще нет ни одного коммита
+
+Untracked files: components/ — папка не отслеживается
+
+Подсказка: используй git add, чтобы начать отслеживать
+
+После добавления файлов:
+
+bash
+git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   components/product.js/product.js
+Когда использовать: Постоянно! Это твой главный помощник.
+
+git log
+Что делает: Показывает историю коммитов.
+
+Пример:
+
+bash
+git log
+commit 204e4e4d5f8a9b2c1d3e4f5a6b7c8d9e0f1a2b3c
+Author: Ruslan <ruslan@example.com>
+Date:   Mon Jun 18 14:30:00 2026 +0300
+
+    Lesson
+git log --oneline
+Что делает: Показывает историю коммитов в сжатом виде (одна строка на коммит).
+
+Пример:
+
+bash
+git log --oneline
+204e4e4 Lesson
+93f392f lesson
+Когда использовать: Быстро посмотреть, что было сделано.
+
+git diff
+Что делает: Показывает изменения в файлах до добавления в staging.
+
+Пример:
+
+bash
+git diff
+diff --git a/readme.txt b/readme.txt
+index 1234567..abcdefg 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1,3 +1,4 @@
+ Hello World
++Новая строка
+git diff --staged
+Что делает: Показывает изменения, которые уже добавлены в staging (ждут коммита).
+
+Пример:
+
+bash
+git diff --staged
+git show <хэш_коммита>
+Что делает: Показывает информацию о конкретном коммите (что изменилось).
+
+Пример:
+
+bash
+git show 204e4e4
+🔴 БЛОК 5: ВЕТКИ (BRANCHES)
+git branch
+Что делает: Показывает список всех веток. Текущая ветка отмечена звездочкой *.
+
+Пример:
+
+bash
+git branch
+* main
+  feature/button
+git branch <имя_ветки>
+Что делает: Создает новую ветку (НО не переключается на нее).
+
+Твой пример:
+
+bash
+git branch feature/button
+Что произошло: Создалась новая ветка feature/button, но ты остался на main.
+
+git branch -M <новое_имя>
+Что делает: Переименовывает текущую ветку.
+
+Твой пример:
+
+bash
+git branch -M main
+Что произошло: Ветка master переименовалась в main (это стандарт на GitHub).
+
+git branch -d <имя_ветки>
+Что делает: Удаляет ветку (локально).
+
+Пример:
+
+bash
+git branch -d feature/button    # Удалить ветку
+git branch -D feature/button    # Принудительно удалить (если не слита)
+git checkout <имя_ветки>
+Что делает: Переключается на другую ветку.
+
+Твой пример (успешный):
+
+bash
+git checkout feature/button
+Switched to branch 'feature/button'
+Что произошло: Переключился на ветку feature/button.
+
+Твой пример (с ошибкой):
+
+bash
+git checkout button
+error: pathspec 'button' did not match any file(s) known to git
+Почему ошибка: Ветка называется feature/button, а не button.
+
+git checkout -b <имя_ветки>
+Что делает: Создает ветку и сразу переключается на нее.
+
+Пример:
+
+bash
+git checkout -b feature/login
+Switched to a new branch 'feature/login'
+git switch <имя_ветки>
+Что делает: Тоже переключает ветку (новая команда, проще чем checkout).
+
+Пример:
+
+bash
+git switch feature/button
+git switch main
+git switch -c feature/new  # Создать и переключиться
+🟣 БЛОК 6: СЛИЯНИЕ (MERGE)
+git merge <имя_ветки>
+Что делает: Вливает изменения из указанной ветки в текущую.
+
+Твой пример:
+
+bash
+git checkout main              # Перешли на main
+git merge feature/button       # Вливаем ветку в main
+Already up to date.            # Нечего вливать (ветка пустая)
+Пример с реальным слиянием:
+
+bash
+git checkout main
+git merge feature/button
+Updating 204e4e4..3f5a6b7
+Fast-forward
+ readme.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+Конфликт при merge
+Что делает Git: Если в двух ветках меняли одни и те же строки — Git не знает, что выбрать.
+
+Как выглядит конфликт:
+
+bash
+git merge feature/button
+Auto-merging readme.txt
+CONFLICT (content): Merge conflict in readme.txt
+Automatic merge failed; fix conflicts and then commit the result.
+Файл с конфликтом (внутри):
+
+text
+<<<<<<< HEAD
+Это текст из MAIN ветки
+=======
+Это текст из FEATURE/BUTTON ветки
+>>>>>>> feature/button
+Решение:
+
+Открыть файл
+
+Удалить <<<<<<<, =======, >>>>>>>
+
+Оставить нужный текст
+
+Сохранить
+
+git add .
+
+git commit -m "Разрешил конфликт"
+
+🔵 БЛОК 7: УДАЛЕННЫЙ РЕПОЗИТОРИЙ (GITHUB)
+git remote add origin <url>
+Что делает: Связывает локальный репозиторий с удаленным на GitHub.
+
+Твой пример:
+
+bash
+git remote add origin https://github.com/ruslan9814/testProject.git
+Что произошло: Теперь удаленный репозиторий доступен по имени origin.
+
+git remote -v
+Что делает: Показывает все связанные удаленные репозитории.
+
+Пример:
+
+bash
+git remote -v
+origin  https://github.com/ruslan9814/testProject.git (fetch)
+origin  https://github.com/ruslan9814/testProject.git (push)
+git push -u origin <ветка>
+Что делает: Отправляет ветку на GitHub и устанавливает связь (upstream).
+
+Твой ПЕРВЫЙ push:
+
+bash
+git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (5/5), 361 bytes | 361.00 KiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/ruslan9814/testProject.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+Что произошло:
+
+Отправлено 5 объектов
+
+Создана новая ветка main на GitHub
+
+Установлена связь: локальная main теперь отслеживает origin/main
+
+Твой push с веткой feature/button:
+
+bash
+git push origin feature/button
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Create a pull request for 'feature/button' on GitHub by visiting:
+remote:      https://github.com/ruslan9814/testProject/pull/new/feature/button
+To https://github.com/ruslan9814/testProject.git
+ * [new branch]      feature/button -> feature/button
+Что произошло: Ветка feature/button появилась на GitHub.
+
+git push
+Что делает: Отправляет изменения в уже связанную ветку (после первого -u).
+
+Твой пример:
+
+bash
+git push origin main
+Everything up-to-date
+Что означает: Все уже отправлено, изменений нет.
+
+git pull origin <ветка>
+Что делает: Скачивает изменения с GitHub в твою локальную ветку.
+
+Твой пример:
+
+bash
+git pull origin main
+From https://github.com/ruslan9814/testProject
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+Что произошло: Скачал изменения (их не было, так как ты сам все залил).
+
+git pull
+Что делает: Скачивает изменения из отслеживаемой ветки (если установлен upstream).
+
+Пример:
+
+bash
+git pull
+Already up to date.
+git fetch
+Что делает: Скачивает изменения с сервера, НО не сливает их с твоей веткой.
+
+Пример:
+
+bash
+git fetch origin
+Отличие от pull: pull = fetch + merge.
+
+git clone <url>
+Что делает: Клонирует (скачивает) чужой репозиторий с GitHub.
+
+Пример:
+
+bash
+git clone https://github.com/ruslan9814/testProject.git
+Что произошло: Создалась папка testProject со всеми файлами и историей.
+
+🟤 БЛОК 8: ОТМЕНА ИЗМЕНЕНИЙ
+git restore <файл>
+Что делает: Отменяет изменения в файле (возвращает к последнему коммиту).
+
+Пример:
+
+bash
+git restore readme.txt     # Отменить ВСЕ изменения в файле
+git restore --staged readme.txt  # Убрать из staging (как reset)
+git reset --hard <хэш>
+Что делает: Возвращает проект к состоянию конкретного коммита (УДАЛЯЕТ все изменения).
+
+Пример:
+
+bash
+git reset --hard 204e4e4   # Вернуться к коммиту 204e4e4
+Осторожно: Удалит все незакоммиченные изменения!
+
+git reset --soft <хэш>
+Что делает: Возвращает к коммиту, но сохраняет изменения в staging.
+
+Пример:
+
+bash
+git reset --soft 93f392f   # Откатиться, но изменения останутся
+git revert <хэш>
+Что делает: Создает новый коммит, который отменяет изменения старого (безопасно).
+
+Пример:
+
+bash
+git revert 204e4e4
+Отличие от reset: revert не переписывает историю, а добавляет новый коммит.
+
+⚪ БЛОК 9: СТЕШИРОВАНИЕ (STASH)
+git stash
+Что делает: Временно прячет незакоммиченные изменения (чтобы переключить ветку).
+
+Пример:
+
+bash
+git stash
+Saved working directory and index state WIP on main: 204e4e4 Lesson
+git stash pop
+Что делает: Возвращает спрятанные изменения обратно.
+
+Пример:
+
+bash
+git stash pop
+On branch main
+Changes not staged for commit:
+  modified:   readme.txt
+git stash list
+Что делает: Показывает все спрятанные изменения.
+
+Пример:
+
+bash
+git stash list
+stash@{0}: WIP on main: 204e4e4 Lesson
+📋 ПОЛНАЯ ШПАРГАЛКА (КРАТКО)
+Команда	Что делает
+git init	Создать репозиторий
+git add .	Добавить все файлы
+git add <файл>	Добавить конкретный файл
+git commit -m "текст"	Создать коммит
+git status	Проверить состояние
+git log --oneline	История коммитов
+git branch <имя>	Создать ветку
+git checkout <имя>	Переключить ветку
+git checkout -b <имя>	Создать и переключить
+git merge <ветка>	Слить ветку
+git remote add origin <url>	Связать с GitHub
+git push -u origin main	Впервые отправить
+git push	Отправить изменения
+git pull	Забрать изменения
+git clone <url>	Скачать репозиторий
+git diff	Показать изменения
+git reset <файл>	Убрать из staging
+git stash	Спрятать изменения
+git stash pop	Вернуть спрятанное
+🎯 ТВОЙ ТИПОВОЙ СЦЕНАРИЙ (ЕЖЕДНЕВНЫЙ)
+bash
+# 1. Начало работы
+git status                          # Проверить, что изменилось
+
+# 2. Работа с изменениями
+git add .                           # Добавить все изменения
+git commit -m "Сделал новую фичу"   # Сохранить
+git push                            # Отправить на GitHub
+
+# 3. Забрать чужие изменения
+git pull                            # Скачать с GitHub
+
+# 4. Создать ветку для новой фичи
+git checkout -b feature/new_feature # Создать и переключиться
+# ... работаешь, коммитишь ...
+git push origin feature/new_feature # Отправить ветку
+
+# 5. Слить ветку с main
+git checkout main                   # Переключиться на main
+git pull                            # Обновить main
+git merge feature/new_feature       # Слить ветку
+git push                            # Отправить на GitHub
+
+# 6. Удалить ветку
+git branch -d feature/new_feature   # Удалить локально
+git push origin --delete feature/new_feature  # Удалить на GitHub
+❗ 5 САМЫХ ЧАСТЫХ ОШИБОК (И РЕШЕНИЯ)
+Ошибка	Причина	Решение
+fatal: pathspec 'file' did not match any files	Файла нет	Создай файл или проверь имя
+error: src refspec main does not match any	Нет коммитов	Сделай git commit -m "first"
+rejected (non-fast-forward)	На GitHub есть новые коммиты	Сделай git pull сначала
+CONFLICT	Конфликт при merge	Открой файл, удали <<<<, оставь нужное
+not a git command	Опечатка	Проверь написание (push/pust)
+Теперь у тебя есть полный справочник! Сохрани это сообщение в закладки и возвращайся, когда забываешь команду. 😊
